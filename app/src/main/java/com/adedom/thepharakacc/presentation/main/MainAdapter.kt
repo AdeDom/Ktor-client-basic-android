@@ -3,7 +3,6 @@ package com.adedom.thepharakacc.presentation.main
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.adedom.thepharakacc.R
 import com.adedom.thepharakacc.model.Staff
@@ -22,9 +21,12 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
         val (fullName, nickName, position, imgUrl) = list[position]
 
-        if (fullName.isNullOrBlank()) holder.itemView.tvFullName.isVisible = false
-        if (nickName.isNullOrBlank()) holder.itemView.tvNickName.isVisible = false
-        if (position.isNullOrBlank()) holder.itemView.tvPosition.isVisible = false
+        holder.itemView.tvFullName.visibility =
+            if (fullName.isNullOrBlank()) View.GONE else View.VISIBLE
+        holder.itemView.tvNickName.visibility =
+            if (nickName.isNullOrBlank()) View.GONE else View.VISIBLE
+        holder.itemView.tvPosition.visibility =
+            if (position.isNullOrBlank()) View.GONE else View.VISIBLE
 
         holder.itemView.tvFullName.text = "ชื่อ $fullName"
         holder.itemView.tvNickName.text = "ชื่อเล่น $nickName"
